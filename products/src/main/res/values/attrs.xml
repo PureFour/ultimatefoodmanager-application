@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProductDetailsTheme">
+        <attr name="productName" format="reference" />
+        <attr name="brandName" format="reference"/>
+        <attr name="category" format="reference"/>
+        <attr name="label" format="reference" />
+        <attr name="valueLabel" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ProductListTheme">
+        <attr name="name" format="reference" />
+        <attr name="brand" format="reference" />
+        <attr name="quantity" format="reference" />
+    </declare-styleable>
+</resources>

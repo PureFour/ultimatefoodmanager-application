@@ -1,0 +1,18 @@
+image: seanghay/android-ci
+before_script:
+  - export GRADLE_USER_HOME=$(pwd)/.gradle
+  - chmod +x ./gradlew
+stages:
+  - build
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+assembleDebug:
+  stage: build
+  script:
+    - ./gradlew assembleRemoteDebug
+    - cp app/build/outputs/apk/remote/debug/app-remote-debug.apk app-remote-debug.apk
+  artifacts:
+    paths:
+      - app/build/outputs/apk/remote/debug/app-remote-debug.apk

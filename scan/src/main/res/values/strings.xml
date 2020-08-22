@@ -1,0 +1,16 @@
+<resources>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="home">Home</string>
+    <string name="scan">Skanuj</string>
+    <string name="manual_scan">Wpisz kod kreskowy recznie</string>
+    <string name="settings">Ustawienia</string>
+    <string name="search">Szukaj po kodzie kreskowym</string>
+    <string name="get_qr">Wygeneruj kod</string>
+    <string name="product_shared_with_users">Produkty dzielone z użytkownikami: </string>
+    <string name="products_not_shared">Aktualnie nie udostępniasz produktów innym użytkownikom!</string>
+    <string name="products_sharing">Udostępnianie produktów</string>
+    <string name="people_shared_products">Osoby z którymi dzielisz produkty</string>
+    <string name="products_shared">Udostępnianie produktów</string>
+    <string name="shared_success">"Udostępniono pomyślnie!"</string>
+</resources>

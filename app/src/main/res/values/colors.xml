@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/green</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">@color/light_green</color>
+
+    <color name="blue">#1b7df5</color>
+    <color name="blueDark">#0c56b0</color>
+    <color name="blueAccent">#4e8fde</color>
+
+    <color name="green">#7bed8d</color>
+    <color name="light_green">#a6edb1</color>
+    <color name="dark_grey">#404e5a</color>
+    <color name="medium_grey">#a6bcd0</color>
+    <color name="dark_seagreen">#00242b</color>
+
+    <color name="background_color">@color/dark_grey</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="brandTextPrimary">@color/medium_grey</color>
+    <color name="brandTextSecondary">@color/white</color>
+</resources>

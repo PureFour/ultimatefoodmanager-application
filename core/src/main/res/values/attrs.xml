@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaterialInput">
+        <attr name="android:inputType" format="reference"/>
+        <attr name="android:hint" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="MyToolbar">
+        <attr name="menu" format="reference"/>
+        <attr name="toolbarTitle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ProductItem">
+        <attr name="android:text" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="AuthTheme">
+        <attr name="activityTitle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ProfileTheme">
+        <attr name="label" format="reference" />
+        <attr name="value" format="reference"/>
+    </declare-styleable>
+</resources>

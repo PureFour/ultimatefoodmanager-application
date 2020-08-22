@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_title">Profil</string>
+    <string name="informations">Informacje</string>
+    <string name="products">Produkty</string>
+    <string name="products_shared">Udostępnianie produktów</string>
+    <string name="people_shared_products">Osoby z którymi dzielisz produkty</string>
+    <string name="logout">Wyloguj</string>
+    <string name="total_own_products">Ilość własnych produktów</string>
+    <string name="total_shared_products">Ilość wspólnych produktów</string>
+
+</resources>

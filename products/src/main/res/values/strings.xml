@@ -1,0 +1,69 @@
+<resources>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="barcode">Kod kreskowy</string>
+    <string name="add">Dodaj produkt</string>
+    <string name="manual_add">Dodaj produkt ręcznie</string>
+    <string name="change_quantity">Zmień ilość</string>
+    <string name="edit">Edytuj</string>
+    <string name="name">Nazwa produktu</string>
+    <string name="scan">Skanuj</string>
+    <string name="reload">Załaduj ponownie</string>
+    <string name="search_product">Wyszukaj produkt</string>
+    <string name="go_to_product_list">Przejdź do listy produktów</string>
+    <string name="brand">Producent:</string>
+    <string name="category_product_details">Kategoria: %s</string>
+    <string name="category_product_edit">Kategoria: </string>
+    <string name="measurementUnit">Jednostka miary:</string>
+    <string name="price_product_details">Proponowana cena: %s</string>
+    <string name="price_product_edit">Proponowana cena: </string>
+    <string name="totalQuantity">Całkowita ilość: </string>
+    <string name="quantity">Ilość: %s</string>
+    <string name="carbohydrates">Węglowodany:</string>
+    <string name="energy">Energia:</string>
+    <string name="fat">Tłuszcz:</string>
+    <string name="fiber">Błonnik:</string>
+    <string name="insatiableFat">Tłuszcze nienasycone:</string>
+    <string name="salt">Sól:</string>
+    <string name="saturatedFat">Tłuszcze nasycone:</string>
+    <string name="sodium">Sód:</string>
+    <string name="sugars">Cukry:</string>
+    <string name="currency">Waluta:</string>
+    <string name="execution_date">Data ważności: %s</string>
+    <string name="remaining_value">Pozostała ilość: %s%%</string>
+    <string name="product_success_added">Pomyślnie dodano produkt o kodzie kreskowym: %s</string>
+    <string name="choose_date">Wybierz date</string>
+    <string name="product_not_found_info">Niestety nie znaleźliśmy produktu w naszej bazie danych. Możesz samodzielnie dodać ten produkt, lub zeskanować ponownie</string>
+    <string name="product_list_empty">Nie znaleziono produktów</string>
+    <string name="delete">usuń produkt</string>
+    <string name="set_execution_date">Ustaw termin ważności</string>
+    <string name="add_photo">Dodaj zdjęcie</string>
+    <string name="shared">Wspólny</string>
+    <string name="save">Zapisz</string>
+    <string name="product_details">Szczegóły produktu</string>
+    <string name="barcode_and_name_required">Kod kreskowy i nazwa są wymagane"</string>
+    <string name="cannot_open_camera">"Nie można włączyć kamery"</string>
+    <string name="select">Wybierz</string>
+    <string name="delete_question_title">"Czy na pewno chcesz usunąć ten produkt?"</string>
+    <string name="total_quantity_label">"Całkowita ilość produktu: %s%s"</string>
+    <string name="actual_quantity_label">"Aktualnie posiadasz %s%s produktu""</string>
+    <string name="no_information_on_quantity">Brak informacji o całkowitej ilości produktu!</string>
+
+    <string name="plant_based_foods">Produkty wegańskie</string>
+    <string name="beverages">Napoje</string>
+    <string name="dairies">Nabiał</string>
+    <string name="snacks">Przekąski</string>
+    <string name="not_found">Brak danych</string>
+    <string name="groceries">Artykuły spożywcze</string>
+    <string name="sync_success">Zsynchronizowano pomyślnie</string>
+
+    <string name="kg">KG</string>
+    <string name="g">G</string>
+    <string name="ml">ML</string>
+    <string name="l">L</string>
+
+    <string name="pln">PLN</string>
+    <string name="eur">EUR</string>
+    <string name="dol">DOL</string>
+
+</resources>
