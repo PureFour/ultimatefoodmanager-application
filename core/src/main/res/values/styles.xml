@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="MainOutlinedButton" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="rippleColor">@color/redSemiTransparent</item>
+    </style>
+
+    <style name="DatePickerDialog" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="colorAccent">@color/red</item>
+    </style>
+
+    <style name="SettingsTheme" parent="AppTheme">
+        <item name="label">@style/LabelStyle</item>
+        <item name="value">@style/ValueStyle</item>
+    </style>
+
+    <style name="LabelStyle" parent="MainTextPrimaryLarge">
+        <item name="android:textColor">@color/light_grey</item>
+    </style>
+
+    <style name="ValueStyle" parent="MainTextPrimaryLarge">
+        <item name="android:textColor">@color/medium_grey</item>
+    </style>
+
+
+    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:textColorPrimary">@color/brandTextPrimary</item>
+    </style>
+
+    <style name="CustomMaterialDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialogText</item>
+    </style>
+
+    <style name="MaterialAlertDialogText" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/brandTextPrimary</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="products">Produkty</string>
+    <string name="scan">Skanuj</string>
+    <string name="settings">Ustawienia</string>
+</resources>

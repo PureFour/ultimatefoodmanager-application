@@ -1,0 +1,31 @@
+<resources>
+
+    <style name="ProductDetailsTheme">
+        <item name="productName">@style/ProductNameStyle</item>
+        <item name="brandName">@style/MainTextPrimaryLarge</item>
+        <item name="category">@style/MainTextPrimary</item>
+        <item name="label">@style/MainTextPrimary</item>
+        <item name="valueLabel">@style/MainTextPrimaryBold</item>
+    </style>
+
+    <style name="ProductNameStyle" parent="MainTextPrimaryLarger">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+        <style name="ProductListTheme" parent="AppTheme">
+            <item name="name">@style/NameStyle</item>
+            <item name="brand">@style/BrandStyle</item>
+            <item name="quantity">@style/MainTextPrimary</item>
+        </style>
+
+        <style name="NameStyle" parent="@style/MainTextPrimary">
+            <item name="android:textStyle">bold</item>
+        </style>
+
+        <style name="BrandStyle" parent="@style/MainTextPrimary">
+            <item name="android:textColor">@color/colorPrimary</item>
+        </style>
+
+</resources>

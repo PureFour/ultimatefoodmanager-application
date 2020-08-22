@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MainText" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">sans-serif</item>
+        <item name="autoSizeMaxTextSize">14sp</item>
+    </style>
+
+    <style name="MainTextPrimary" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/brandTextPrimary</item>
+    </style>
+
+    <style name="MainTextPrimaryBold" parent="MainTextPrimary">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainTextPrimarySmall" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
+    <style name="MainTextPrimaryLarge" parent="MainTextPrimary">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="MainTextPrimaryLargeBold" parent="MainTextPrimaryLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainTextPrimaryLarger" parent="MainTextPrimary">
+        <item name="android:textSize">@dimen/font_larger</item>
+    </style>
+
+    <style name="MainTextPrimaryHuge" parent="MainTextPrimary">
+        <item name="android:textSize">@dimen/font_huge</item>
+    </style>
+
+    <style name="MainTextSecondary" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/brandTextSecondary</item>
+    </style>
+
+    <style name="MainPrimaryHeader" parent="MainTextPrimaryLarger">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+</resources>

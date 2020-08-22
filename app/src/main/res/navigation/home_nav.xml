@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/productListFragment">
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.raddyr.products.ui.list.ProductListFragment"
+        android:label="@string/products" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.raddyr.settings.ui.SettingsFragment"
+        android:label="@string/settings" />
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="com.raddyr.scan.ui.ScanFragment"
+        android:label="@string/scan" />
+</navigation>

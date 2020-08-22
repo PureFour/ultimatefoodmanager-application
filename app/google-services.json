@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "90793682148",
+    "project_id": "ultimate-food-manager",
+    "storage_bucket": "ultimate-food-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90793682148:android:e3476519bf4b05d73878f1",
+        "android_client_info": {
+          "package_name": "com.raddyr.ufm.local"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90793682148-8eg349q62901enej6tl7eoa04pp0pdae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU9PsGjAzOYw_70t1X7GjMj2Tc72dpy-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90793682148-8eg349q62901enej6tl7eoa04pp0pdae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90793682148:android:977b6c7363c8a1483878f1",
+        "android_client_info": {
+          "package_name": "com.raddyr.ufm.remote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90793682148-8eg349q62901enej6tl7eoa04pp0pdae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU9PsGjAzOYw_70t1X7GjMj2Tc72dpy-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90793682148-8eg349q62901enej6tl7eoa04pp0pdae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ProductDetailsTheme"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    tools:showIn="@layout/product_details_activity">
+
+    <TextView
+        android:id="@+id/label"
+        style="?label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_marginEnd="@dimen/spacing_tiny"
+        android:layout_weight="0.5"
+        android:gravity="end"
+        tools:text="@string/brand" />
+
+    <TextView
+        android:id="@+id/valueLabel"
+        style="?valueLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_tiny"
+        android:layout_marginTop="@dimen/spacing_tiny"
+        android:layout_weight="0.5"
+        tools:text="KOTLIN KARAKAN Sp.Z.O.O" />
+</LinearLayout>
