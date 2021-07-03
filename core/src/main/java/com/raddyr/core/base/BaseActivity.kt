@@ -66,9 +66,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract fun afterView()
 
+    override fun onStop() {
+        dialogManager.hideProgressBar()
+        super.onStop()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        dialogManager.hideProgressBar()
         subscriptionManager.unregisterAll()
     }
 

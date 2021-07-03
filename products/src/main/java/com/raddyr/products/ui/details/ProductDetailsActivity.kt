@@ -74,17 +74,20 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
         }
     }
 
-    private val startForResultStatusAfterSend = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        onActivityResult(ACTION_AFTER_SEND, result)
-    }
+    private val startForResultStatusAfterSend =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onActivityResult(ACTION_AFTER_SEND, result)
+        }
 
-    private val startForResultAddProduct = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        onActivityResult(ACTION_AFTER_SEND, result)
-    }
+    private val startForResultAddProduct =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onActivityResult(ACTION_AFTER_SEND, result)
+        }
 
-    private val startForResultEditProduct = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        onActivityResult(EDIT_PRODUCT, result)
-    }
+    private val startForResultEditProduct =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onActivityResult(EDIT_PRODUCT, result)
+        }
 
     private fun setupObservers() {
         responseHandler.observe(
@@ -97,10 +100,12 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
                     buttonFirst.text = getString(R.string.edit)
                     buttonSecond.text = getString(R.string.add)
                     buttonFirst.setOnClickListener {
-                        startForResultEditProduct.launch(EditProductActivity.prepareIntent(
-                            this@ProductDetailsActivity,
-                            viewModel.searchResponse.value?.data!!
-                        ))
+                        startForResultEditProduct.launch(
+                            EditProductActivity.prepareIntent(
+                                this@ProductDetailsActivity,
+                                viewModel.searchResponse.value?.data!!
+                            )
+                        )
                     }
                 }
 
@@ -117,12 +122,12 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
             viewModel.addResponse,
             object : Callback<Product> {
                 override fun onLoaded(data: Product) {
-                       startForResultStatusAfterSend.launch(
-                           StatusAfterSendActivity.prepareIntent(
-                               this@ProductDetailsActivity,
-                               data.productCard?.barcode!!
-                           )
-                       )
+                    startForResultStatusAfterSend.launch(
+                        StatusAfterSendActivity.prepareIntent(
+                            this@ProductDetailsActivity,
+                            data.productCard?.barcode!!
+                        )
+                    )
                 }
             })
 
@@ -199,11 +204,13 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
                     getString(MeasurementUnit.valueOf(measurementUnit.toString()).unit)
                 )
             )
-            addDataToHeader(
-                priceLabel,
-                R.string.price_product_details,
-                String.format("%s %s", price?.value, price?.currency)
-            )
+            if (price?.value != null && price?.currency != null) {
+                addDataToHeader(
+                    priceLabel,
+                    R.string.price_product_details,
+                    String.format("%s %s", price?.value, price?.currency)
+                )
+            }
             addSection(R.string.carbohydrates, nutriments?.carbohydrates.toString())
             addSection(R.string.energy, nutriments?.energy.toString())
             addSection(R.string.fat, nutriments?.fat.toString())

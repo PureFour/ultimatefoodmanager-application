@@ -44,6 +44,16 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
 
     override fun afterView() {
         setupObservers()
+        setSwipeToRefresh()
+    }
+
+    private fun setSwipeToRefresh() {
+        swipeToRefresh.setColorSchemeColors(requireContext().getColor(R.color.colorPrimary))
+        swipeToRefresh.setProgressBackgroundColorSchemeColor(requireContext().getColor(R.color.black))
+        swipeToRefresh.setOnRefreshListener {
+            viewModel.allRequest.value = true
+            swipeToRefresh.isRefreshing = false
+        }
     }
 
     private fun setupObservers() {

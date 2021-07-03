@@ -37,8 +37,7 @@ class ScanFragment(override val contentViewLayout: Int = R.layout.scan_fragment)
     @Inject
     lateinit var dataCache: DataCache
 
-    private val startForResult =
-        activity?.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
 
 
     override fun afterView() {
@@ -64,7 +63,7 @@ class ScanFragment(override val contentViewLayout: Int = R.layout.scan_fragment)
                 activityAndFragment.shareSettingsActivity(requireContext(), data).get()
             )
         } catch (e: IllegalArgumentException) {
-            startForResult?.launch(
+            startForResult.launch(
                 activityAndFragment.productDetailsActivity(
                     requireContext(),
                     data

@@ -225,14 +225,16 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
                     ProductSpinner(
                         this@BaseProductActivity,
                         getString(R.string.category_product_edit),
-                        Category.getDefaultCategoriesList()
+                        Category.getDefaultCategoriesList(),
+                        this?.category
                     )
                 )
                 measurementUnit = addProductSpinner(
                     ProductSpinner(
                         this@BaseProductActivity,
                         getString(R.string.measurementUnit),
-                        MeasurementUnit.getDefaultCategoriesList()
+                        MeasurementUnit.getDefaultCategoriesList(),
+                        this?.measurementUnit
                     )
                 )
 
@@ -327,6 +329,7 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
                         .setSaturatedFat(
                             saturatedFat.getValue()?.toFloat()
                         )
+                        .setFat(fat.getValue()?.toFloat())
                         .setSodium(
                             sodium.getValue()?.toFloat()
                         )

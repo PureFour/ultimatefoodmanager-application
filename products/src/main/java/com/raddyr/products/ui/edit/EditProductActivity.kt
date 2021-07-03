@@ -31,6 +31,7 @@ class EditProductActivity(override val contentViewLayout: Int = R.layout.base_pr
         toolbar.setNavigationOnClickListener { onBackPressed() }
         configureView()
         setButton()
+        setCheckbox()
         setupObservers()
     }
 
@@ -52,6 +53,10 @@ class EditProductActivity(override val contentViewLayout: Int = R.layout.base_pr
                 }
             }
         }
+    }
+
+    private fun setCheckbox() {
+        checkbox.isChecked = productToEdit?.metadata?.shared == true
     }
 
     override fun invokeRequest(product: Product) {

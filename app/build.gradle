@@ -31,12 +31,12 @@ android {
 
     productFlavors {
         remote {
-            setupUrl owner, 'http://167.172.97.142:', '8080', '/'
+            setupUrl owner, 'http://165.227.128.114:', '8080', '/'
             changeAppNameAndAppId owner, 'ultimate food manager remote', '.remote'
         }
 
         local {
-            setupUrl owner, 'http://192.168.0.103:', '8080', '/'
+            setupUrl owner, 'http://192.168.197.131:', '8080', '/'
             changeAppNameAndAppId owner, 'ultimate food manager local', '.local'
         }
     }

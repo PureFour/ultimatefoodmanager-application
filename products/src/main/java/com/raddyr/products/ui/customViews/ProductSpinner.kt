@@ -25,7 +25,8 @@ class ProductSpinner(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         )
-        spinner.adapter = SpinnerAdapter(context, list).also { setDefaultValue(it) }
+        spinner.adapter = SpinnerAdapter(context, list)
+        setDefaultValue(spinner.adapter as SpinnerAdapter)
         label.text = labelValue
     }
 
