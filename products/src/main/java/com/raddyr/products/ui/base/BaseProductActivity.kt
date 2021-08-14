@@ -315,7 +315,8 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
                 .setPrice(Price(price.getValue()?.toFloat(), currency.getValue().toString()))
                 .setMeasurementUnit(measurementUnit.getValue() as MeasurementUnit)
                 .setTotalQuantity(
-                    totalQuantity.getValue()?.toFloat().let { if (it == 0.0f) 1.0f else it })
+                    totalQuantity.getValue()?.toFloat()
+                        .let { if (it == 0.0f || it == null) 1.0f else it })
                 .setPhotoUrl(getPhotoUrl())
                 .setNutriments(
                     Nutriments().setCarbohydrates(
@@ -339,7 +340,8 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
                             sugars.getValue()?.toFloat()
                         )
                 )
-        ).setQuantity(totalQuantity.getValue()?.toFloat())
+        ).setQuantity(
+            totalQuantity.getValue()?.toFloat().let { if (it == 0.0f || it == null) 1.0f else it })
             .setMetadata(ProductMetadata().setShared(checkbox.isChecked))
 
     private fun onActivityResult(requestCode: Int, result: ActivityResult) {
