@@ -25,7 +25,7 @@ class InputFilterMinMax(private val min: Float, private val max: Float) : InputF
     }
 
     private fun isInRange(a: Float, b: Float, c: Float): Boolean {
-        return c.toString().length < MAX_INPUT_LENGTH && if (b > a) (c in a..b) else c in b..a
+        return c.toString().length < MAX_INPUT_LENGTH || if (b > a) (c in a..b) else c in b..a
     }
 
     companion object {

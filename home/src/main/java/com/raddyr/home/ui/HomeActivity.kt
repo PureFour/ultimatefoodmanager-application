@@ -30,8 +30,7 @@ class HomeActivity(override val contentViewLayout: Int = R.layout.home_activity)
 
 
     private fun setBottomNavigationAndTitle() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         bottomNavigation.setupWithNavController(navController)
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->

@@ -78,9 +78,10 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
 
     var imageFile: File? = null
     var productToEdit: Product? = null
-    private val startForResultCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        onActivityResult(CAMERA_REQUEST_CODE, result)
-    }
+    private val startForResultCamera =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onActivityResult(CAMERA_REQUEST_CODE, result)
+        }
 
     override fun afterView() {
         setViewModel()
@@ -313,7 +314,8 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
                 .setCategory(category.getValue() as Category)
                 .setPrice(Price(price.getValue()?.toFloat(), currency.getValue().toString()))
                 .setMeasurementUnit(measurementUnit.getValue() as MeasurementUnit)
-                .setTotalQuantity(totalQuantity.getValue()?.toFloat())
+                .setTotalQuantity(
+                    totalQuantity.getValue()?.toFloat().let { if (it == 0.0f) 1.0f else it })
                 .setPhotoUrl(getPhotoUrl())
                 .setNutriments(
                     Nutriments().setCarbohydrates(
@@ -343,14 +345,22 @@ abstract class BaseProductActivity<T : BaseProductViewModel>() :
     private fun onActivityResult(requestCode: Int, result: ActivityResult) {
         if (requestCode == CAMERA_REQUEST_CODE && result.resultCode == Activity.RESULT_OK) {
             val ei = ExifInterface(imageFile?.absolutePath!!)
-            val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+            val orientation = ei.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED
+            )
             var rotatedBitmap: Bitmap? = null
-            when(orientation) {
-                ExifInterface.ORIENTATION_ROTATE_90-> rotatedBitmap = rotateImage(BitmapFactory.decodeFile(imageFile?.absolutePath), 90f)
-                ExifInterface.ORIENTATION_ROTATE_180-> rotatedBitmap = rotateImage(BitmapFactory.decodeFile(imageFile?.absolutePath), 180f)
-                ExifInterface.ORIENTATION_ROTATE_270-> rotatedBitmap = rotateImage(BitmapFactory.decodeFile(imageFile?.absolutePath), 270f)
-                ExifInterface.ORIENTATION_NORMAL-> rotatedBitmap = BitmapFactory.decodeFile(imageFile?.absolutePath)
-                ExifInterface.ORIENTATION_UNDEFINED-> rotatedBitmap = BitmapFactory.decodeFile(imageFile?.absolutePath)
+            when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> rotatedBitmap =
+                    rotateImage(BitmapFactory.decodeFile(imageFile?.absolutePath), 90f)
+                ExifInterface.ORIENTATION_ROTATE_180 -> rotatedBitmap =
+                    rotateImage(BitmapFactory.decodeFile(imageFile?.absolutePath), 180f)
+                ExifInterface.ORIENTATION_ROTATE_270 -> rotatedBitmap =
+                    rotateImage(BitmapFactory.decodeFile(imageFile?.absolutePath), 270f)
+                ExifInterface.ORIENTATION_NORMAL -> rotatedBitmap =
+                    BitmapFactory.decodeFile(imageFile?.absolutePath)
+                ExifInterface.ORIENTATION_UNDEFINED -> rotatedBitmap =
+                    BitmapFactory.decodeFile(imageFile?.absolutePath)
             }
             image.setImageBitmap(rotatedBitmap)
             dialogManager.showProgressBar()

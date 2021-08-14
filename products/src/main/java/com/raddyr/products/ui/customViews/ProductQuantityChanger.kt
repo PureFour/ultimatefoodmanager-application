@@ -67,9 +67,14 @@ class ProductQuantityChanger(
         }
         okButton.setOnClickListener {
             if (input.text!!.isNotEmpty()) {
-                listener.invoke(input.text.toString().toFloat())
-                hide()
-                dismiss()
+                if (input.text.toString().toFloat() < product.productCard!!.totalQuantity!!.toFloat()) {
+                        listener.invoke(input.text.toString().toFloat())
+                        hide()
+                        dismiss()
+                    } else {
+                     errorInputEmpty.text = context.getString(R.string.quantity_error)
+                    errorInputEmpty.visibility = View.VISIBLE
+                    }
             } else {
                 errorInputEmpty.visibility = View.VISIBLE
             }

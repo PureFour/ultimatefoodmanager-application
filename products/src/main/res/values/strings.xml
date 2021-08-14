@@ -48,6 +48,7 @@
     <string name="total_quantity_label">"Całkowita ilość produktu: %s%s"</string>
     <string name="actual_quantity_label">"Aktualnie posiadasz %s%s produktu""</string>
     <string name="no_information_on_quantity">Brak informacji o całkowitej ilości produktu!</string>
+    <string name="quantity_error">Posiadana ilość nie może być większa niż maksymalna!</string>
 
     <string name="plant_based_foods">Produkty wegańskie</string>
     <string name="beverages">Napoje</string>

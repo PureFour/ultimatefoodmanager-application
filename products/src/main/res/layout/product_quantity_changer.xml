@@ -63,12 +63,13 @@
     <TextView
         android:visibility="gone"
         android:id="@+id/errorInputEmpty"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/input_must_not_be_empty"
         android:textColor="@color/red"
-        app:layout_constraintEnd_toEndOf="@id/input"
-        app:layout_constraintStart_toStartOf="@id/input"
+        android:layout_margin="@dimen/spacing_bigger"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/input" />
 
     <TextView
