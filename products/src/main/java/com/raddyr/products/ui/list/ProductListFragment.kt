@@ -13,10 +13,14 @@ import com.raddyr.core.util.responseHandler.Callback
 import com.raddyr.core.util.responseHandler.ResponseHandler
 import com.raddyr.core.util.tokenUtil.TokenUtil
 import com.raddyr.products.R
+import com.raddyr.products.data.db.dao.ProductDao
 import com.raddyr.products.data.model.Product
+import com.raddyr.products.data.model.ProductMapper
 import com.raddyr.products.ui.customViews.ProductQuantityChanger
 import com.raddyr.products.ui.details.ProductDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.product_list_fragment.*
 import javax.inject.Inject
 
@@ -33,8 +37,13 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     @Inject
     lateinit var tokenUtil: TokenUtil
 
+    @Inject
+    lateinit var productdao: ProductDao
+
+
     private val viewModel by viewModels<ProductListViewModel> { viewModelFactory }
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
 
     override fun onResume() {
         emptyList.visibility = GONE
@@ -45,6 +54,17 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     override fun afterView() {
         setupObservers()
         setSwipeToRefresh()
+        observeLocalDb()
+    }
+
+    private fun observeLocalDb() {
+        productdao.getAll()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io()).subscribe({
+                setAdapter(
+                    it.map { product -> ProductMapper.getProduct(product) }.toList()
+                )
+            }, {})
     }
 
     private fun setSwipeToRefresh() {
@@ -89,7 +109,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             list,
             tokenUtil,
             {
-                 startForResult.launch(
+                startForResult.launch(
                     ProductDetailsActivity.prepareIntentWithUIID(
                         requireContext(),
                         it.uuid.toString()

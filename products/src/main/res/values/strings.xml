@@ -57,6 +57,7 @@
     <string name="not_found">Brak danych</string>
     <string name="groceries">Artykuły spożywcze</string>
     <string name="sync_success">Zsynchronizowano pomyślnie</string>
+    <string name="synchronized_with_conflict">Jeden lub wiecej produktów które edytowałeś zostało usuniętych przez innych użytkowników</string>
 
     <string name="kg">KG</string>
     <string name="g">G</string>

@@ -5,6 +5,7 @@ import com.raddyr.products.data.model.Product
 import com.raddyr.products.data.model.ProductCard
 import com.raddyr.core.data.model.SharedInfoResponse
 import com.raddyr.core.data.model.UserResponse
+import com.raddyr.products.data.model.SynchronizeAllResponse
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -22,7 +23,7 @@ interface ProductServiceApi {
     fun all(): Single<List<Product>>
 
     @PUT("products/synchronizeAll")
-    fun sync(@Body products: List<Product>): Single<List<Product>>
+    fun sync(@Body products: List<Product>): Single<SynchronizeAllResponse>
 
     @GET("products")
     fun get(@Query("uuid") uuid: String): Single<Product>

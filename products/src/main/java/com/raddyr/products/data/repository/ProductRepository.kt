@@ -166,25 +166,4 @@ class ProductRepository @Inject constructor(
             { updateLiveDataByError(this, throwable = it) })
 
     }
-
-    fun sync() = MutableLiveData<Resource<List<ProductData>>>().apply {
-        value = Resource(status = Status.LOADING)
-        subscriptionManager.observe(productDao.getNotSync().flatMap {
-            serviceApi!!.sync(it.map { productEntity ->
-                ProductMapper.getProduct(
-                    productEntity
-                )
-            })
-        }, { data ->
-            value = Resource(data = data, status = Status.SUCCESS)
-            subscriptionManager.observe(
-                productDao.deleteAll().flatMap {
-                    productDao.insert(data.map { product ->
-                        ProductMapper.getProductEntity(product)
-                    }.toList())
-                }, { Timber.i("Database Synchronized") }, { Timber.e(it) })
-        }, {
-            updateLiveDataByError(this, throwable = it)
-        })
-    }
 }

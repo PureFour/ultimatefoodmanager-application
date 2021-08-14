@@ -34,14 +34,16 @@ class SyncService : Service() {
                     { data ->
                         subscriptionManager.observe(
                             productDao.deleteAll().flatMap {
-                                productDao.insert(data.map { product ->
+                                productDao.insert(data.synchronizedProducts.map { product ->
                                     ProductMapper.getProductEntity(product)
                                 }.toList())
                             }, {
+                                val message = if (data.status == CONFLICT_STATUS) getString(R.string.synchronized_with_conflict)
+                                     else getString(R.string.sync_success)
                                 Timber.i("Database Synchronized")
                                 Toast.makeText(
                                     applicationContext,
-                                    R.string.sync_success,
+                                    message,
                                     Toast.LENGTH_LONG
                                 ).show()
                             }, { e -> Timber.e(e) })
@@ -80,5 +82,6 @@ class SyncService : Service() {
     companion object {
         private var sSyncAdapter: SyncAdapter? = null
         private val sSyncAdapterLock = Any()
+        private val CONFLICT_STATUS = "CONFLICT"
     }
 }
