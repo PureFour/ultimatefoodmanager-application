@@ -17,6 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.raddyr.core.util.tokenUtil.TokenUtil
 import com.raddyr.products.R
 import com.raddyr.products.data.model.Product
+import kotlinx.android.synthetic.main.product_details_activity.*
 import kotlinx.android.synthetic.main.product_list_item.view.*
 
 class ProductViewPagerAdapter(
@@ -91,6 +92,7 @@ class ProductViewPagerAdapter(
 
                 } else {
                     image.setImageResource(R.drawable.placeholder)
+                    progressBar.visibility = GONE
                 }
                 if (product.metadata?.shared != null && product.metadata?.shared == true) {
                     container.strokeColor = context.getColor(R.color.colorPrimary)

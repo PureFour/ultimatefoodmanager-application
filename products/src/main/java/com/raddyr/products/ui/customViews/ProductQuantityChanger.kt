@@ -67,7 +67,7 @@ class ProductQuantityChanger(
         }
         okButton.setOnClickListener {
             if (input.text!!.isNotEmpty()) {
-                if (input.text.toString().toFloat() < product.productCard!!.totalQuantity!!.toFloat()) {
+                if (input.text.toString().toFloat() <= product.productCard!!.totalQuantity!!.toFloat()) {
                         listener.invoke(input.text.toString().toFloat())
                         hide()
                         dismiss()

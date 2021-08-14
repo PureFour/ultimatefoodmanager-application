@@ -213,6 +213,7 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
                 .into(image)
         } else {
             image.setImageResource(R.drawable.placeholder)
+            progressBar.visibility = GONE
         }
 
         product.productCard?.apply {

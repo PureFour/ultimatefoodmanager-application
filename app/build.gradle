@@ -36,7 +36,7 @@ android {
         }
 
         local {
-            setupUrl owner, 'http://192.168.197.131:', '8080', '/'
+            setupUrl owner, 'http://192.168.1.31:', '8080', '/'
             changeAppNameAndAppId owner, 'ultimate food manager local', '.local'
         }
     }
