@@ -1,5 +1,6 @@
 package com.raddyr.products.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -22,6 +23,9 @@ interface ProductDao {
 
     @Query("SELECT * FROM product_table")
     fun getAll(): Single<List<ProductEntity>>
+
+    @Query("SELECT * FROM product_table")
+    fun getAllLiveData(): LiveData<List<ProductEntity>>
 
     @Query("SELECT * FROM product_table WHERE barcode =:barcode")
     fun getByBarcode(barcode: String): Single<ProductEntity>

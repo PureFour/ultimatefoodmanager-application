@@ -1,6 +1,5 @@
 package com.raddyr.products.ui.list
 
-import android.content.DialogInterface
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,8 +18,6 @@ import com.raddyr.products.data.model.ProductMapper
 import com.raddyr.products.ui.customViews.ProductQuantityChanger
 import com.raddyr.products.ui.details.ProductDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.product_list_fragment.*
 import javax.inject.Inject
 
@@ -58,13 +55,9 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     }
 
     private fun observeLocalDb() {
-        productdao.getAll()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io()).subscribe({
-                setAdapter(
-                    it.map { product -> ProductMapper.getProduct(product) }.toList()
-                )
-            }, {})
+        productdao.getAllLiveData().observe(this, {
+            setAdapter(it.map { product -> ProductMapper.getProduct(product) }.toList())
+        })
     }
 
     private fun setSwipeToRefresh() {
@@ -117,7 +110,13 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
                 )
             }, { showEditQuantityDialog(it) }, { showDeleteDialog(it) })
         recycler.layoutManager = GridLayoutManager(requireContext(), 1)
-        if (list.isEmpty()) emptyList.visibility = VISIBLE else GONE
+        if (data.isEmpty()) {
+            emptyList.visibility = VISIBLE
+            recycler.visibility = GONE
+        } else {
+            recycler.visibility = VISIBLE
+            emptyList.visibility = GONE
+        }
     }
 
     private fun showEditQuantityDialog(product: Product) {
@@ -129,7 +128,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     private fun showDeleteDialog(product: Product) {
         activity?.displayQuestionDialog(
             getString(R.string.delete_question_title),
-            positiveListener = DialogInterface.OnClickListener { _, _ ->
+            positiveListener = { _, _ ->
                 viewModel.deleteRequest.value = product
             })
     }
