@@ -43,7 +43,7 @@ class ProductQuantityChanger(
                     context.getString(MeasurementUnit.valueOf(measurementUnit!!.name).unit)
                 )
                 input.filters = arrayOf(InputFilterMinMax(0.01f, totalQuantity!!))
-                measurementUnitLabel.text = measurementUnit.toString()
+                measurementUnitLabel.text =context.getString(MeasurementUnit.valueOf(measurementUnit!!.name).unit)
             } else {
                 txt1.text = context.getString(R.string.no_information_on_quantity)
                 input.filters = arrayOf(InputFilterMinMax(0.01f, MAX_TOTAL_QUANTITY))
