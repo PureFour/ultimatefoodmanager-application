@@ -30,6 +30,7 @@ import com.raddyr.products.data.model.ProductMetadata
 import com.raddyr.products.ui.add.AddProductActivity
 import com.raddyr.products.ui.base.BaseProductActivity.Companion.PRODUCT_DETAILS
 import com.raddyr.products.ui.customViews.ProductDetailsSection
+import com.raddyr.products.ui.customViews.QuantitySelector
 import com.raddyr.products.ui.edit.EditProductActivity
 import com.raddyr.products.ui.status.StatusAfterSendActivity
 import com.raddyr.products.ui.status.StatusAfterSendActivity.Companion.ACTION
@@ -39,6 +40,7 @@ import com.raddyr.products.ui.utils.DatePickerCustomTitle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.product_details_activity.*
 import kotlinx.android.synthetic.main.product_list_item.view.*
+import kotlinx.android.synthetic.main.quantity_selector.*
 import java.util.*
 import javax.inject.Inject
 
@@ -55,6 +57,8 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
 
     @Inject
     lateinit var dateFormatterUtils: DateFormatterUtils
+
+    private lateinit var quantitySelector: QuantitySelector
 
     private val viewModel by lazy { viewModelFactory.create(ProductDetailsViewModel::class.java) }
 
@@ -118,8 +122,21 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
                 override fun onError(throwable: Throwable): Boolean {
                     contentContainer.visibility = GONE
                     notFoundProductContainer.visibility = VISIBLE
+                    checkboxGroup.visibility = GONE
                     buttonsGroup.visibility = GONE
                     setNotFoundProductListeners()
+                    return false
+                }
+
+                override fun onNoInternet(): Boolean {
+                    contentContainer.visibility = GONE
+                    checkboxGroup.visibility = GONE
+                    buttonsGroup.visibility = GONE
+                    errorScreen.visibility = VISIBLE
+                    toolbar.menu.findItem(R.id.edit_product).isVisible = false
+                    reloadButton.setOnClickListener {
+                        viewModel.searchRequest.value = intent.getStringExtra(UUID)
+                    }
                     return false
                 }
             })
@@ -264,12 +281,14 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
                 DatePickerDialog(
                     this,
                     { _, mYear, mMonth, mDay ->
-                        viewModel.addRequest.value = viewModel.searchResponse.value?.data.apply {
-                            this?.setMetadata(
-                                ProductMetadata().setExpiryDate(
-                                    dateFormatterUtils.format(mDay, mMonth, mYear)
-                                ).setShared(checkbox.isChecked)
-                            )
+                        viewModel.addRequest.value = List<Product>(quantitySelector.value) {
+                            viewModel.searchResponse.value?.data.apply {
+                                this?.setMetadata(
+                                    ProductMetadata().setExpiryDate(
+                                        dateFormatterUtils.format(mDay, mMonth, mYear)
+                                    ).setShared(checkbox.isChecked)
+                                )
+                            }!!
                         }
                     },
                     year,
@@ -283,7 +302,9 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
                 )
             )
             dtp.setCancelable(false)
-            dtp.show()
+            quantitySelector = QuantitySelector(this) {
+                dtp.show()
+            }.apply { show() }
         }
     }
 

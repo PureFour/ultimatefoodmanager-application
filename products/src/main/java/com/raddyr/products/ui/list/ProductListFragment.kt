@@ -3,11 +3,16 @@ package com.raddyr.products.ui.list
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.raddyr.core.base.BaseFragment
 import com.raddyr.core.util.extensions.displayQuestionDialog
+import com.raddyr.core.util.interfaces.Home
 import com.raddyr.core.util.responseHandler.Callback
 import com.raddyr.core.util.responseHandler.ResponseHandler
 import com.raddyr.core.util.tokenUtil.TokenUtil
@@ -15,6 +20,7 @@ import com.raddyr.products.R
 import com.raddyr.products.data.db.dao.ProductDao
 import com.raddyr.products.data.model.Product
 import com.raddyr.products.data.model.ProductMapper
+import com.raddyr.products.ui.customViews.FilterBottomSheetFragment
 import com.raddyr.products.ui.customViews.ProductQuantityChanger
 import com.raddyr.products.ui.details.ProductDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +58,21 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
         setupObservers()
         setSwipeToRefresh()
         observeLocalDb()
+        setFilterIcon()
+    }
+
+    private fun setFilterIcon() {
+        with((activity as Home).getToolbar().menu.findItem(R.id.edit_product)) {
+            icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_filter)
+            isVisible = true
+            setOnMenuItemClickListener {
+                val fragment = FilterBottomSheetFragment.newInstance()
+                BottomSheetBehavior.from(fragment).getPeekHeight()
+                fragment.show((activity as AppCompatActivity).supportFragmentManager, "kutas")
+                true
+            }
+        }
+
     }
 
     private fun observeLocalDb() {

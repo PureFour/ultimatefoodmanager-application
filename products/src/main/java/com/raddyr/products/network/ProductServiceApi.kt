@@ -14,7 +14,7 @@ import retrofit2.http.*
 interface ProductServiceApi {
 
     @POST("products")
-    fun add(@Body product: Product): Single<Product>
+    fun add(@Body product: List<Product>): Single<Product>
 
     @GET("products/search")
     fun search(@Query("barcode") barcode: String): Single<ProductCard>

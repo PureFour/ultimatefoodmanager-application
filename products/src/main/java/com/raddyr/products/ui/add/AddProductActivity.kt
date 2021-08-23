@@ -9,6 +9,7 @@ import com.raddyr.core.util.responseHandler.Callback
 import com.raddyr.products.R
 import com.raddyr.products.data.model.Product
 import com.raddyr.products.ui.base.BaseProductActivity
+import com.raddyr.products.ui.customViews.QuantitySelector
 import com.raddyr.products.ui.details.ProductDetailsActivity.Companion.ACTION_AFTER_SEND
 import com.raddyr.products.ui.status.StatusAfterSendActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +39,9 @@ class AddProductActivity(override val contentViewLayout: Int = R.layout.base_pro
     }
 
     override fun invokeRequest(product: Product) {
-        viewModel.addRequest.value = product
+        QuantitySelector(this) {
+            viewModel.addRequest.value = List(it) { product }
+        }
     }
 
     private fun setupObservers() {

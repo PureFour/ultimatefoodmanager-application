@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class AddProductViewModel @Inject constructor(repository: ProductRepository) : BaseProductViewModel(repository) {
 
-    var addRequest = MutableLiveData<Product>()
+    var addRequest = MutableLiveData<List<Product>>()
 
     var addResponse = Transformations.switchMap(addRequest) {
         repository.add(it)

@@ -26,7 +26,7 @@ class ProductRepository @Inject constructor(
 ) :
     BaseRepository<ProductServiceApi>(apiProvider) {
 
-    fun add(product: Product) = MutableLiveData<Resource<Product>>().apply {
+    fun add(product: List<Product>) = MutableLiveData<Resource<Product>>().apply {
         value = Resource(status = Status.LOADING)
         subscriptionManager.observe(
             serviceApi?.add(product)!!,

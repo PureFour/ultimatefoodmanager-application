@@ -15,7 +15,7 @@ import javax.inject.Inject
 class ProductDetailsViewModel @Inject constructor(repository: ProductRepository) : ViewModel() {
 
     var searchRequest = MutableLiveData<String>()
-    var addRequest = MutableLiveData<Product>()
+    var addRequest = MutableLiveData<List<Product>>()
     var getRequest = MutableLiveData<String>()
 
 

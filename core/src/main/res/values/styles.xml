@@ -33,7 +33,7 @@
 
 
     <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar" >
-        <item name="android:textColorPrimary">@color/brandTextPrimary</item>
+        <item name="android:textColorPrimary">@color/light_grey</item>
     </style>
 
     <style name="CustomMaterialDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
