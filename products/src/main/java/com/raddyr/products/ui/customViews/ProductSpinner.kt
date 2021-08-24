@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.raddyr.products.R
+import com.raddyr.products.data.model.Category
 import com.raddyr.products.data.model.Enums
 import com.raddyr.products.ui.base.SpinnerAdapter
 import kotlinx.android.synthetic.main.section_with_spinner.view.*
@@ -16,7 +17,7 @@ class ProductSpinner(
     context: Context,
     labelValue: String?,
     list: List<Enums>?,
-    private val defValue: Enums? = null,
+    private var defValue: Enums? = null,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
 
@@ -47,7 +48,8 @@ class ProductSpinner(
             Timber.d(exception)
         }
     }
-    fun setData(list: List<Enums>, text: String) {
+    fun setData(list: List<Enums>, text: String, default: Category) {
+        defValue = default
         spinner.adapter = SpinnerAdapter(context, list)
         setDefaultValue(spinner.adapter as SpinnerAdapter)
         label.text = text

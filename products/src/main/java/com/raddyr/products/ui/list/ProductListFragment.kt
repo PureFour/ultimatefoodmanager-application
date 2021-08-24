@@ -25,6 +25,7 @@ import com.raddyr.products.data.model.ProductMapper
 import com.raddyr.products.ui.customViews.FilterBottomSheetFragment
 import com.raddyr.products.ui.customViews.ProductQuantityChanger
 import com.raddyr.products.ui.details.ProductDetailsActivity
+import com.raddyr.products.util.FiltersCache
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.product_list_fragment.*
 import javax.inject.Inject
@@ -47,6 +48,9 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
 
     @Inject
     lateinit var dateFormatterUtils: DateFormatterUtils
+
+    @Inject
+    lateinit var filtersCache: FiltersCache
 
 
     private val viewModel by viewModels<ProductListViewModel> { viewModelFactory }
@@ -71,7 +75,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_filter)
             isVisible = true
             setOnMenuItemClickListener {
-                val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils) {viewModel.allRequest.value = it}
+                val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils, filtersCache, dialogManager, {viewModel.allRequest.value = it}, {viewModel.allRequest.value = FiltersRequest()})
                 fragment.show((activity as AppCompatActivity).supportFragmentManager, "filterDialog")
                 true
             }

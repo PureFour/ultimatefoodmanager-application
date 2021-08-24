@@ -61,6 +61,9 @@
     <string name="filter">Filtruj</string>
     <string name="set_min_execution_date">Ustaw minimalny termin ważności</string>
     <string name="set_max_execution_date">Ustaw maksymalny termin ważności</string>
+    <string name="clear">Wyczyść</string>
+    <string name="asc">Rosnąco</string>
+    <string name="desc">Malejąco</string>
 
 
     <string name="kg">KG</string>

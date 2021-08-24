@@ -41,4 +41,8 @@
     <style name="MainPrimaryHeader" parent="MainTextPrimaryLarger">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="MainPrimaryHeaderSmaller" parent="MainTextPrimaryLarge">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 </resources>

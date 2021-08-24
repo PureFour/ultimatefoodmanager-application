@@ -38,13 +38,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/set_execution_date" />
+                android:text="@string/set_min_execution_date" />
 
         </LinearLayout>
 
         <TextView
-            style="@style/MainPrimaryHeader"
             android:id="@+id/minDateLabel"
+            style="@style/MainPrimaryHeaderSmaller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
@@ -69,16 +69,46 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/set_execution_date" />
+                android:text="@string/set_max_execution_date" />
         </LinearLayout>
 
         <TextView
-            style="@style/MainPrimaryHeader"
             android:id="@+id/maxDateLabel"
+            style="@style/MainPrimaryHeaderSmaller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_normal">
+
+            <RadioButton
+                android:id="@+id/radioAsc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asc" />
+
+            <RadioButton
+                android:id="@+id/radioDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/desc" />
+        </RadioGroup>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:text="@string/clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/filterButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/filterButton"
@@ -88,6 +118,5 @@
         android:text="@string/filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toEndOf="@id/clearButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
