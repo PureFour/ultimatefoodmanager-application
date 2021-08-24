@@ -143,12 +143,12 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
         responseHandler.observe(
             this,
             viewModel.addResponse,
-            object : Callback<Product> {
-                override fun onLoaded(data: Product) {
+            object : Callback<List<Product>> {
+                override fun onLoaded(data: List<Product>) {
                     startForResultStatusAfterSend.launch(
                         StatusAfterSendActivity.prepareIntent(
                             this@ProductDetailsActivity,
-                            data.productCard?.barcode!!
+                            data[0].productCard?.barcode!!
                         )
                     )
                 }

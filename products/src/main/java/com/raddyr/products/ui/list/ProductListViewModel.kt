@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.raddyr.core.data.Resource
+import com.raddyr.products.data.model.FiltersRequest
 import com.raddyr.products.data.model.Product
 import com.raddyr.products.data.model.ProductMapper
 import com.raddyr.products.data.repository.ProductRepository
@@ -13,7 +14,7 @@ import javax.inject.Inject
 class ProductListViewModel @Inject constructor(
     repository: ProductRepository
 ) : ViewModel() {
-    var allRequest = MutableLiveData<Boolean>()
+    var allRequest = MutableLiveData<FiltersRequest>()
     var deleteRequest = MutableLiveData<Product>()
     var editRequest = MutableLiveData<Product>()
 
@@ -22,7 +23,7 @@ class ProductListViewModel @Inject constructor(
     }
 
     var allResponse: LiveData<Resource<List<Product>>> = Transformations.switchMap(allRequest) {
-        Transformations.map(repository.all()) {
+        Transformations.map(repository.all(it)) {
             return@map Resource(
                 it.data?.map { product -> ProductMapper.getProduct(product) }?.toList(),
                 it.status,

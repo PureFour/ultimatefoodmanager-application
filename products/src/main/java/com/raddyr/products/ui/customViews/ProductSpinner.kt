@@ -14,20 +14,26 @@ import timber.log.Timber
 
 class ProductSpinner(
     context: Context,
-    labelValue: String,
-    list: List<Enums>,
+    labelValue: String?,
+    list: List<Enums>?,
     private val defValue: Enums? = null,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
+
+
+    constructor(context: Context, attrs: AttributeSet?) : this(context, null, null,null, attrs)
+
     init {
         View.inflate(context, R.layout.section_with_spinner, this)
         layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         )
-        spinner.adapter = SpinnerAdapter(context, list)
-        setDefaultValue(spinner.adapter as SpinnerAdapter)
-        label.text = labelValue
+        if (labelValue != null && list!=null) {
+            spinner.adapter = SpinnerAdapter(context, list)
+            setDefaultValue(spinner.adapter as SpinnerAdapter)
+            label.text = labelValue
+        }
     }
 
     fun getValue(): Enums = spinner.selectedItem as Enums
@@ -40,6 +46,11 @@ class ProductSpinner(
         } catch (exception: Exception) {
             Timber.d(exception)
         }
+    }
+    fun setData(list: List<Enums>, text: String) {
+        spinner.adapter = SpinnerAdapter(context, list)
+        setDefaultValue(spinner.adapter as SpinnerAdapter)
+        label.text = text
     }
 }
 

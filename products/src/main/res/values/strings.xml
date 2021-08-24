@@ -58,6 +58,10 @@
     <string name="groceries">Artykuły spożywcze</string>
     <string name="sync_success">Zsynchronizowano pomyślnie</string>
     <string name="synchronized_with_conflict">Jeden lub wiecej produktów, które edytowałeś, zostało usuniętych przez innych użytkowników</string>
+    <string name="filter">Filtruj</string>
+    <string name="set_min_execution_date">Ustaw minimalny termin ważności</string>
+    <string name="set_max_execution_date">Ustaw maksymalny termin ważności</string>
+
 
     <string name="kg">KG</string>
     <string name="g">G</string>

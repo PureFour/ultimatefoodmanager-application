@@ -9,10 +9,7 @@ import com.raddyr.core.data.network.interceptors.NetworkConnectionInterceptor
 import com.raddyr.core.data.repository.BaseRepository
 import com.raddyr.products.data.db.dao.ProductDao
 import com.raddyr.products.data.db.entity.ProductEntity
-import com.raddyr.products.data.model.ImageUploadResponse
-import com.raddyr.products.data.model.Product
-import com.raddyr.products.data.model.ProductData
-import com.raddyr.products.data.model.ProductMapper
+import com.raddyr.products.data.model.*
 import com.raddyr.products.network.ProductServiceApi
 import com.raddyr.products.network.ProductServiceApiProvider
 import okhttp3.MultipartBody
@@ -26,12 +23,13 @@ class ProductRepository @Inject constructor(
 ) :
     BaseRepository<ProductServiceApi>(apiProvider) {
 
-    fun add(product: List<Product>) = MutableLiveData<Resource<Product>>().apply {
+    fun add(product: ProductList) = MutableLiveData<Resource<List<Product>>>().apply {
         value = Resource(status = Status.LOADING)
         subscriptionManager.observe(
             serviceApi?.add(product)!!,
             { data -> value = Resource(data = data, status = Status.SUCCESS)
-                subscriptionManager.observe(productDao.insert(ProductMapper.getProductEntity(data)), {},{})},
+                subscriptionManager.observe(productDao.insert(data.map { prod-> ProductMapper.getProductEntity(prod)}.toList()), {},{})
+            },
             { updateLiveDataByError(this, throwable = it) })
     }
 
@@ -44,11 +42,11 @@ class ProductRepository @Inject constructor(
             { updateLiveDataByError(this, throwable = it) })
     }
 
-    fun all() = MutableLiveData<Resource<List<ProductData>>>().apply {
+    fun all(filtersRequest: FiltersRequest) = MutableLiveData<Resource<List<ProductData>>>().apply {
         value = Resource(status = Status.LOADING)
         subscriptionManager.observe(
             if (interceptor.isInternetEnabled())
-                serviceApi!!.all() else productDao.getAll(),
+                serviceApi!!.all(filtersRequest) else productDao.getAll(),
             { data ->
                 value = Resource(data = data, status = Status.SUCCESS)
                 if (interceptor.isInternetEnabled()) {

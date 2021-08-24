@@ -1,11 +1,8 @@
 package com.raddyr.products.network
 
-import com.raddyr.products.data.model.ImageUploadResponse
-import com.raddyr.products.data.model.Product
-import com.raddyr.products.data.model.ProductCard
 import com.raddyr.core.data.model.SharedInfoResponse
 import com.raddyr.core.data.model.UserResponse
-import com.raddyr.products.data.model.SynchronizeAllResponse
+import com.raddyr.products.data.model.*
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -14,13 +11,13 @@ import retrofit2.http.*
 interface ProductServiceApi {
 
     @POST("products")
-    fun add(@Body product: List<Product>): Single<Product>
+    fun add(@Body product: List<Product>): Single<List<Product>>
 
     @GET("products/search")
     fun search(@Query("barcode") barcode: String): Single<ProductCard>
 
     @POST("products/all")
-    fun all(): Single<List<Product>>
+    fun all(@Body filtersRequest: FiltersRequest): Single<List<Product>>
 
     @PUT("products/synchronizeAll")
     fun sync(@Body products: List<Product>): Single<SynchronizeAllResponse>

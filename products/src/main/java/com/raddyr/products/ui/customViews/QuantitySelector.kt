@@ -29,7 +29,7 @@ class QuantitySelector(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quantity_selector)
-
+        setCancelable(false)
         numberPicker.maxValue = 10
         numberPicker.minValue = 1
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

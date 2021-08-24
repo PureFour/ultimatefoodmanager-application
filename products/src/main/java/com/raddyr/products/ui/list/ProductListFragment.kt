@@ -12,12 +12,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.raddyr.core.base.BaseFragment
 import com.raddyr.core.util.extensions.displayQuestionDialog
+import com.raddyr.core.util.formaters.DateFormatterUtils
 import com.raddyr.core.util.interfaces.Home
 import com.raddyr.core.util.responseHandler.Callback
 import com.raddyr.core.util.responseHandler.ResponseHandler
 import com.raddyr.core.util.tokenUtil.TokenUtil
 import com.raddyr.products.R
 import com.raddyr.products.data.db.dao.ProductDao
+import com.raddyr.products.data.model.FiltersRequest
 import com.raddyr.products.data.model.Product
 import com.raddyr.products.data.model.ProductMapper
 import com.raddyr.products.ui.customViews.FilterBottomSheetFragment
@@ -43,6 +45,9 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     @Inject
     lateinit var productdao: ProductDao
 
+    @Inject
+    lateinit var dateFormatterUtils: DateFormatterUtils
+
 
     private val viewModel by viewModels<ProductListViewModel> { viewModelFactory }
     private val startForResult =
@@ -50,7 +55,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
 
     override fun onResume() {
         emptyList.visibility = GONE
-        viewModel.allRequest.value = true
+        viewModel.allRequest.value = FiltersRequest()
         super.onResume()
     }
 
@@ -66,9 +71,8 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_filter)
             isVisible = true
             setOnMenuItemClickListener {
-                val fragment = FilterBottomSheetFragment.newInstance()
-                BottomSheetBehavior.from(fragment).getPeekHeight()
-                fragment.show((activity as AppCompatActivity).supportFragmentManager, "kutas")
+                val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils) {viewModel.allRequest.value = it}
+                fragment.show((activity as AppCompatActivity).supportFragmentManager, "filterDialog")
                 true
             }
         }
@@ -85,7 +89,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
         swipeToRefresh.setColorSchemeColors(requireContext().getColor(R.color.colorPrimary))
         swipeToRefresh.setProgressBackgroundColorSchemeColor(requireContext().getColor(R.color.black))
         swipeToRefresh.setOnRefreshListener {
-            viewModel.allRequest.value = true
+            viewModel.allRequest.value = FiltersRequest()
             swipeToRefresh.isRefreshing = false
         }
     }
@@ -105,13 +109,13 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             viewModel.deleteResponse,
             object : Callback<Unit> {
                 override fun onLoaded(data: Unit) {
-                    viewModel.allRequest.value = true
+                    viewModel.allRequest.value = FiltersRequest()
                 }
             })
 
         responseHandler.observe(this, viewModel.editResponse, object : Callback<Product> {
             override fun onLoaded(data: Product) {
-                viewModel.allRequest.value = true
+                viewModel.allRequest.value = FiltersRequest()
             }
         })
     }

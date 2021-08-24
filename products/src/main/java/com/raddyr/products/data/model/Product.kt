@@ -8,6 +8,8 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 import javax.annotation.Nullable
 
+typealias ProductList = List<Product>
+
 @Parcelize
 data class ProductCard(
     var barcode: String? = null,

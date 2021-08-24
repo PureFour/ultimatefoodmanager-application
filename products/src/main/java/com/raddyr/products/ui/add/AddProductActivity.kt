@@ -41,19 +41,19 @@ class AddProductActivity(override val contentViewLayout: Int = R.layout.base_pro
     override fun invokeRequest(product: Product) {
         QuantitySelector(this) {
             viewModel.addRequest.value = List(it) { product }
-        }
+        }.show()
     }
 
     private fun setupObservers() {
         responseHandler.observe(
             this,
             viewModel.addResponse,
-            object : Callback<Product> {
-                override fun onLoaded(data: Product) {
+            object : Callback<List<Product>> {
+                override fun onLoaded(data: List<Product>) {
                     startForResult.launch(
                         StatusAfterSendActivity.prepareIntent(
                             this@AddProductActivity,
-                            data.productCard?.barcode
+                            data[0].productCard?.barcode
                         )
                     )
                 }
