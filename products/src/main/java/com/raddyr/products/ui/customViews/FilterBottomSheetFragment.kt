@@ -21,7 +21,6 @@ import java.util.*
 class FilterBottomSheetFragment(
     private val dateFormatterUtils: DateFormatterUtils,
     private val cache: FiltersCache,
-    private val dialogManager: DialogManager,
     private val getFilters: (filters: FiltersRequest) -> Unit,
     private val clearFilters: () -> Unit,
 
@@ -142,13 +141,11 @@ class FilterBottomSheetFragment(
         fun newInstance(
             dateFormatterUtils: DateFormatterUtils,
             cache: FiltersCache,
-            dialogManager: DialogManager,
             getFilters: (filters: FiltersRequest) -> Unit,
             clearFilters: () -> Unit
         ) = FilterBottomSheetFragment(
             dateFormatterUtils,
             cache,
-            dialogManager,
             getFilters,
             clearFilters
         )

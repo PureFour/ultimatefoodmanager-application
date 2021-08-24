@@ -75,7 +75,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_filter)
             isVisible = true
             setOnMenuItemClickListener {
-                val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils, filtersCache, dialogManager, {viewModel.allRequest.value = it}, {viewModel.allRequest.value = FiltersRequest()})
+                val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils, filtersCache, {viewModel.allRequest.value = it}, {viewModel.allRequest.value = FiltersRequest()})
                 fragment.show((activity as AppCompatActivity).supportFragmentManager, "filterDialog")
                 true
             }
