@@ -44,6 +44,9 @@ class FilterBottomSheetFragment(
             cache.category
         )
         radioAsc.isChecked = cache.asc
+        radioDesc.isChecked = !cache.asc
+        minDateLabel.text = cache.minDate
+        maxDateLabel.text = cache.maxDate
         setDataPicker(minDateButton) { date -> setDateLabel(minDateLabel, date) }
         setDataPicker(maxDateButton) { date -> setDateLabel(maxDateLabel, date) }
         filterButton.setOnClickListener {
@@ -114,30 +117,33 @@ class FilterBottomSheetFragment(
     private fun getData() = FiltersRequest(
         listOf(
             FilterObject(
-                "CATEGORY",
+                CATEGORY,
                 Range(exactValue = (categorySpinner.getValue() as Category).name)
             ),
             FilterObject(
-                "EXPIRY_DATE",
+                EXPIRY_DATE,
                 if (minDateLabel.text.isEmpty() && maxDateLabel.text.isNotEmpty() || maxDateLabel.text.isEmpty() && minDateLabel.text.isNotEmpty()) {
                     Range(exactValue = if (minDateLabel.text.isNotEmpty()) minDateLabel.text.toString() else maxDateLabel.text.toString())
                 } else {
                     Range(
                         minimumValue = if (minDateLabel.text.toString()
-                                .isEmpty()
+                                .length>3
                         ) null else minDateLabel.text.toString(),
                         maximumValue = if (maxDateLabel.text.toString()
-                                .isEmpty()
+                                .length>3
                         ) null else maxDateLabel.text.toString()
                     )
                 }
             )
         ),
-        sorting = Sorting("EXPIRY_DATE", true)
+        sorting = Sorting(EXPIRY_DATE, true)
     )
 
 
     companion object {
+
+        private const val EXPIRY_DATE = "EXPIRY_DATE"
+        private const val CATEGORY = "CATEGORY"
         fun newInstance(
             dateFormatterUtils: DateFormatterUtils,
             cache: FiltersCache,

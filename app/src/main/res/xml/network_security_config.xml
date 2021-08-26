@@ -3,7 +3,7 @@
     tools:ignore="MissingDefaultResource">
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">static.openfoodfacts.org</domain>
-        <domain includeSubdomains="true">167.172.97.142</domain>
+        <domain includeSubdomains="true">34.116.211.66</domain>
         <domain includeSubdomains="true">192.168.1.31</domain>
         <domain includeSubdomains="true">165.227.128.114</domain>
     </domain-config>

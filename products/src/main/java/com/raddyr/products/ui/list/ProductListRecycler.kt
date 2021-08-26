@@ -32,7 +32,7 @@ class ProductListRecycler(
         fun bind(products: List<Product>) {
             with(itemView) {
                 viewPager.adapter = ProductViewPagerAdapter(
-                    products,
+                    products.take(10),
                     detailsListener,
                     editListener,
                     deleteListener,

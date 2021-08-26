@@ -31,7 +31,7 @@ android {
 
     productFlavors {
         remote {
-            setupUrl owner, 'http://165.227.128.114:', '8080', '/'
+            setupUrl owner, 'http://34.116.211.66:', '8080', '/'
             changeAppNameAndAppId owner, 'ultimate food manager remote', '.remote'
         }
 
