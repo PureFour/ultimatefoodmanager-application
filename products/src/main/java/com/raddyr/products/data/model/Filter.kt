@@ -1,6 +1,6 @@
 package com.raddyr.products.data.model
 
-data class FiltersRequest(val filters: List<FilterObject>? = null, val sorting: Sorting? = null)
+data class FiltersRequest(val filters: List<FilterObject?>? = null, val sorting: Sorting? = null)
 
 data class FilterObject(val selector: String, val range: Range)
 

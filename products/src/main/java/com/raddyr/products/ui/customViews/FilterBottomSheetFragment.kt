@@ -64,13 +64,19 @@ class FilterBottomSheetFragment(
         }
     }
 
-    private fun dateIsCorrect():Boolean {
+    private fun dateIsCorrect(): Boolean {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
-        if (minDateLabel.text.toString().isNotEmpty() && maxDateLabel.text.toString().isNotEmpty()) {
+        if (minDateLabel.text.toString().isNotEmpty() && maxDateLabel.text.toString()
+                .isNotEmpty()
+        ) {
             val minDate = sdf.parse(minDateLabel.text.toString())
             val maxDate = sdf.parse(maxDateLabel.text.toString())
             if (minDate != null && minDate.after(maxDate)) {
-                Snackbar.make(dialog?.window?.decorView!!, "Minimalna data nie może być większa od maksymalnej!", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    dialog?.window?.decorView!!,
+                    "Minimalna data nie może być większa od maksymalnej!",
+                    Snackbar.LENGTH_LONG
+                ).show()
                 return false
             }
         }
@@ -114,30 +120,32 @@ class FilterBottomSheetFragment(
         label.text = date
     }
 
-    private fun getData() = FiltersRequest(
-        listOf(
+    private fun getData(): FiltersRequest {
+        val filters: MutableList<FilterObject> = mutableListOf(
             FilterObject(
                 CATEGORY,
                 Range(exactValue = (categorySpinner.getValue() as Category).name)
-            ),
-            FilterObject(
-                EXPIRY_DATE,
-                if (minDateLabel.text.isEmpty() && maxDateLabel.text.isNotEmpty() || maxDateLabel.text.isEmpty() && minDateLabel.text.isNotEmpty()) {
-                    Range(exactValue = if (minDateLabel.text.isNotEmpty()) minDateLabel.text.toString() else maxDateLabel.text.toString())
-                } else {
-                    Range(
-                        minimumValue = if (minDateLabel.text.toString()
-                                .length>3
-                        ) null else minDateLabel.text.toString(),
-                        maximumValue = if (maxDateLabel.text.toString()
-                                .length>3
-                        ) null else maxDateLabel.text.toString()
-                    )
-                }
             )
-        ),
-        sorting = Sorting(EXPIRY_DATE, true)
-    )
+        )
+        if (!(minDateLabel.text.isNullOrEmpty() && maxDateLabel.text.isNullOrEmpty())) {
+            filters.add(
+                FilterObject(
+                    EXPIRY_DATE,
+                    if (minDateLabel.text.isEmpty() && maxDateLabel.text.isNotEmpty() || maxDateLabel.text.isEmpty() && minDateLabel.text.isNotEmpty()) {
+                        Range(exactValue = if (minDateLabel.text.isNotEmpty()) minDateLabel.text.toString() else maxDateLabel.text.toString())
+                    } else {
+                        Range(
+                            minimumValue = minDateLabel.text.toString(),
+                            maximumValue = maxDateLabel.text.toString()
+                        )
+                    }
+                )
+            )
+        }
+        return FiltersRequest(
+            filters, sorting = Sorting(EXPIRY_DATE, true)
+        )
+    }
 
 
     companion object {
