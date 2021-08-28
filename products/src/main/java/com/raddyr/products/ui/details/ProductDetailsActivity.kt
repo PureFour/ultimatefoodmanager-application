@@ -205,6 +205,7 @@ class ProductDetailsActivity(override val contentViewLayout: Int = R.layout.prod
             Glide
                 .with(this)
                 .load(glideUrl)
+                .error(R.drawable.placeholder)
                 .addListener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                         e: GlideException?,

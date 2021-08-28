@@ -1,7 +1,10 @@
 package com.raddyr.products.ui.list
 
+import android.opengl.Visibility
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.raddyr.core.base.BaseFragment
+import com.raddyr.core.data.network.interceptors.NetworkConnectionInterceptor
 import com.raddyr.core.util.extensions.displayQuestionDialog
 import com.raddyr.core.util.formaters.DateFormatterUtils
 import com.raddyr.core.util.interfaces.Home
@@ -52,6 +56,9 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     @Inject
     lateinit var filtersCache: FiltersCache
 
+    @Inject
+    lateinit var networkInterceptor: NetworkConnectionInterceptor
+
 
     private val viewModel by viewModels<ProductListViewModel> { viewModelFactory }
     private val startForResult =
@@ -75,8 +82,12 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_filter)
             isVisible = true
             setOnMenuItemClickListener {
-                val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils, filtersCache, {viewModel.allRequest.value = it}, {viewModel.allRequest.value = FiltersRequest()})
-                fragment.show((activity as AppCompatActivity).supportFragmentManager, "filterDialog")
+                if (networkInterceptor.isInternetEnabled()) {
+                    val fragment = FilterBottomSheetFragment.newInstance(dateFormatterUtils, filtersCache, {viewModel.allRequest.value = it}, {viewModel.allRequest.value = FiltersRequest()})
+                    fragment.show((activity as AppCompatActivity).supportFragmentManager, "filterDialog")
+                } else {
+                    Toast.makeText(requireContext(), R.string.turn_on_internet, Toast.LENGTH_LONG).show()
+                }
                 true
             }
         }
@@ -103,9 +114,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             viewLifecycleOwner,
             viewModel.allResponse,
             object : Callback<List<Product>> {
-                override fun onLoaded(data: List<Product>) {
-                    setAdapter(data)
-                }
+                override fun onLoaded(data: List<Product>) {}
             })
 
         responseHandler.observe(
@@ -125,26 +134,26 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     }
 
     private fun setAdapter(data: List<Product>) {
-        val list = data.filter { it.metadata?.toBeDeleted == false }
-            .groupBy { product -> product.productCard?.barcode }.toList()
-        recycler.adapter = ProductListRecycler(
-            list,
-            tokenUtil,
-            {
-                startForResult.launch(
-                    ProductDetailsActivity.prepareIntentWithUIID(
-                        requireContext(),
-                        it.uuid.toString()
-                    )
-                )
-            }, { showEditQuantityDialog(it) }, { showDeleteDialog(it) })
-        recycler.layoutManager = GridLayoutManager(requireContext(), 1)
-        if (data.isEmpty()) {
+        if (data.filter { it.metadata?.isSynchronized == true}.isEmpty()) {
             emptyList.visibility = VISIBLE
             recycler.visibility = GONE
         } else {
             recycler.visibility = VISIBLE
             emptyList.visibility = GONE
+            val list = data.filter { it.metadata?.toBeDeleted == false }
+                .groupBy { product -> product.productCard?.barcode }.toList()
+            recycler.adapter = ProductListRecycler(
+                list,
+                tokenUtil,
+                {
+                    startForResult.launch(
+                        ProductDetailsActivity.prepareIntentWithUIID(
+                            requireContext(),
+                            it.uuid.toString()
+                        )
+                    )
+                }, { showEditQuantityDialog(it) }, { showDeleteDialog(it) })
+            recycler.layoutManager = GridLayoutManager(requireContext(), 1)
         }
     }
 
