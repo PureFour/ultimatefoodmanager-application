@@ -114,7 +114,9 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
             viewLifecycleOwner,
             viewModel.allResponse,
             object : Callback<List<Product>> {
-                override fun onLoaded(data: List<Product>) {}
+                override fun onLoaded(data: List<Product>) {
+                    setAdapter(data)
+                }
             })
 
         responseHandler.observe(
