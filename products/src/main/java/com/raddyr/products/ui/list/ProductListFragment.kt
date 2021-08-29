@@ -136,7 +136,7 @@ class ProductListFragment(override val contentViewLayout: Int = R.layout.product
     }
 
     private fun setAdapter(data: List<Product>) {
-        if (data.filter { it.metadata?.isSynchronized == true}.isEmpty()) {
+        if (data.filter { it.metadata?.toBeDeleted == false}.isEmpty()) {
             emptyList.visibility = VISIBLE
             recycler.visibility = GONE
         } else {
